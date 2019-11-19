@@ -1,0 +1,14 @@
+{
+  "name": "proxy",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/PiotrPawelski/GreenLand-Greenhouse-Automation-Proxy.git",
+  "author": "Piotr Pawelski <programerson@gmail.com>",
+  "dependencies": {
+    "express": "^4.17.1",
+    "request": "^2.88.0"
+  },
+  "scripts": {
+    "start": "nodemon src/index.js"
+  }
+}
