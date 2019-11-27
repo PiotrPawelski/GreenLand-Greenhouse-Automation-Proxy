@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 const express = require('express');
-const request = require('request');
+const axios = require('axios');
 
 const app = express();
 
@@ -12,52 +12,15 @@ app.use((req, res, next) => {
   next();
 });
 
+
 app.get('/get', (req, res) => {
-  const retJSON = [];
-  let count = 0;
+  const promises = IPTABLE.map((ip) => axios.get(`${ip}/get`));
 
-  for (const ip of IPTABLE) {
-    const clientServerOptions = {
-      uri: ip + '/get',
-      method: 'GET',
-    };
-
-    request(clientServerOptions, (error, response, body) => {
-      retJSON.push(body);
-      count++;
-
-      if (count === IPTABLE.length) {
-        res.send(retJSON);
-      }
+  Promise.all(promises)
+    .then((responses) => {
+      res.send(responses.map((response) => response.data));
     });
-  }
 });
 
-app.post('/post', (req, res) => {
-  console.log(JSON.parse(req.body));
-  for (const ip of IPTABLE) {
-    const clientServerOptions = {
-      uri: ip + '/get',
-      method: 'GET',
-    };
-    
-    request(clientServerOptions, (error, response, body) => {
-      console.log(id);
-        if (body.id === req.body.id) {
-          const clientServerOptions = {
-            uri: ip + '/post',
-            method: 'POST',
-            json: true,
-            body: req.body,
-          };
-        
-          request(clientServerOptions, (error, response, body) => {
-            console.log(body);
-          });
-      }
-    });
-  }
-  
-});
 
 app.listen(5000, () => console.log('Express server is running on localhost:5000'));
