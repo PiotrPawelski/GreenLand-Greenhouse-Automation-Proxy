@@ -5,7 +5,7 @@
   "repository": "https://github.com/PiotrPawelski/GreenLand-Greenhouse-Automation-Proxy.git",
   "author": "Piotr Pawelski <programerson@gmail.com>",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "express": "^4.17.1"
   },
   "scripts": {
